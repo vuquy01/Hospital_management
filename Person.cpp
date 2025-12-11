@@ -115,6 +115,18 @@ string Person::layMail() const
 {
 	return mail;
 }
+string Person::layCCCD_CMND() const
+{
+
+}
+string Person::layDiaChi() const
+{
+
+}
+int Person::layAge() const
+{
+
+}
 
 /*khoi ham gan*/
 void Person::ganDate(string d)
