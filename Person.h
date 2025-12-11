@@ -20,7 +20,7 @@ protected:
 public:
 	/*khoi ham khoi tao*/
 	Person();
-	Person(string cccd, string n, string d, string sex, string diachii, string sdt, string m);
+	Person(string cccd, string n, string d, string sex, string diachii, string sdt);
 
 	/*khối các phương thức thuần ảo*/
 	virtual void Input();
@@ -59,5 +59,6 @@ public:
 	void luuVaoFile(ofstream& file) const;    // Lưu vào file
 	void docTuFile(ifstream& file);           // Đọc từ file
 };
+
 
 
