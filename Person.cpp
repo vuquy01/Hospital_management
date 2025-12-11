@@ -67,13 +67,7 @@ void Person::Input()
 		}
 	} while (!kiemTraSDTHopLe());
 	cin.ignore();
-	do{
-		cout << "\nNhap mail: ";
-		getline(cin, mail);
-		if (!kiemTraEmailHopLe())
-			cout << "\nEmail khong hop le.";
-	} while (!kiemTraEmailHopLe());
-}
+	
 void Person::Display()
 {
 	cout << "========Hien thi========";
@@ -228,3 +222,4 @@ void Person::docTuFile(ifstream& file)
 	getline(file, SDT);
 	getline(file, mail);
 }
+
