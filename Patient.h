@@ -1,6 +1,5 @@
 #pragma once
 #include"Person.h"
-#include"Schedule.h"
 class Patient :public Person
 {
 	/*Khối 1 thuộc tính riêng của bệnh nhân*/
@@ -12,30 +11,36 @@ class Patient :public Person
 	string nhomMau;        // Nhóm máu
 	float chieuCao;        // Chiều cao (cm)
 	float canNang;        // Cân nặng (kg)
-
-	/*khối 4 thông tin khác*/
-	string trangThaiDieuTri;    // "DangDieuTri", "XuatVien", "ChuyenVien"
-	string ngayXuatVien;        // Ngày xuất viện
-	string lyDoXuatVien;        // Lý do xuất viện
 public:
 	/*khoi ham khoi tao*/
 	Patient();
+
 	/*khối hàm cơ bản*/
 	void Input();
 	void Display();
 	void hienThiThongTinCoBan() const;
+	string taoID();
 
 	/*khoi ham gan gia tri*/
-	void ganMaBenhNhan(const string& id);
-	void ganChuanDoan(const string& cd);
-	void ganBHYT(const string& bhyt);
+	void ganBHYT(string bhyt);
+	void ganhsdBYHT(string hsd);
+	void ganDateNhapVien(string date);
+	void ganChisoSucKhoeMau(string Mau);
+	void ganChisoSucKhoeCao(float h);
+	void ganChisoSucKhoeNang(float w);
 
 	/*khoi ham lay gia tri*/
-	string layMaBenhNhan() const;
-	string layChuanDoan() const;
 	string layBHYT() const;
+	string layhsdBYHT() const;
+	string layDateNhapVien() const;
+	string layChisoSucKhoeMau() const;
+	float layChisoSucKhoeCao() const;
+	float layChisoSucKhoeNang() const;
 
 	/*khoi ham ktra*/
+	bool kiemTraNhomMau() const;
+	bool kiemTraCanNang() const;
+	bool kiemTraChieuCao() const;
 	bool kiemTraBHYTHopLe() const;
 	bool kiemTraNgayNhapVienHopLe(string ngay) const;
 };
