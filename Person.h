@@ -18,8 +18,6 @@ private:
     string DiaChi;
     string SDT;
     int age;
-    bool ktra(char c);
-    
 public:
     Person();
     Person(string cccd, string n, string d, string sex, string diachii, string sdt); 
@@ -42,3 +40,4 @@ public:
     void luuVaoFile(ofstream& file);
     void docTuFile(ifstream& file); 
 };
+
