@@ -16,7 +16,7 @@ protected:
 	string GioiTinh; /*gioi han gioi tinh lai xong ktra*/
 	string DiaChi;
 	string SDT; /*Hàm ktra*/
-	string mail; /*Hàm ktra*/
+	
 public:
 	/*khoi ham khoi tao*/
 	Person();
@@ -59,4 +59,5 @@ public:
 	void luuVaoFile(ofstream& file) const;    // Lưu vào file
 	void docTuFile(ifstream& file);           // Đọc từ file
 };
+
 
