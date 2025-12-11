@@ -4,7 +4,6 @@
 class Patient :public Person
 {
 	/*Khối 1 thuộc tính riêng của bệnh nhân*/
-	string ChuanDoan;
 	string ngaynhapvien;/*ktra ngày*/
 	string maSoBHYT;            // Mã số BHYT
 	string ngayHetHanBHYT;      // Ngày hết hạn BHYT
@@ -38,6 +37,6 @@ public:
 
 	/*khoi ham ktra*/
 	bool kiemTraBHYTHopLe() const;
-	bool kiemTraNgayNhapVienHopLe() const;
+	bool kiemTraNgayNhapVienHopLe(string ngay) const;
 };
 
