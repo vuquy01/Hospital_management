@@ -5,9 +5,6 @@ Patient::Patient() :Person()
     ngaynhapvien = "";
     maSoBHYT = "";
     ngayHetHanBHYT = "";
-    trangThaiDieuTri = "DangDieuTri";
-    ngayXuatVien = "";
-    lyDoXuatVien = "";
     nhomMau = "";       // Nhóm máu
     chieuCao = 0.0;   // Chiều cao (cm)
     canNang = 0.0;        // Cân nặng (kg)
@@ -23,14 +20,25 @@ void Patient::Input()
         if (!kiemTraNgayNhapVienHopLe(ngaynhapvien))
             cout << "\nNgay nhap vien khong hop le.";
     } while (!kiemTraNgayNhapVienHopLe(ngaynhapvien));
-    cout << "Nhap so BHYT: ";
-    cin >> maSoBHYT;
+    do {
+        cout << "Nhap so BHYT: ";
+        cin >> maSoBHYT;
+        if (!kiemTraBHYTHopLe())
+            cout << "\nSo BHYT khong hop le.";
+    } while (!kiemTraBHYTHopLe());
     do {
         cout << "\nNhap ngay het han bao hiem y te(dd/mm/yyyy): ";
         cin >> ngayHetHanBHYT;
         if (!kiemTraDinhDangNgaySinh(ngayHetHanBHYT))
             cout << "\nNgay nhap vien khong hop le.";
     } while (!kiemTraDinhDangNgaySinh(ngayHetHanBHYT));
+    cout << "\nNhap vao cac chi so suc khoe: ";
+    cout << "\nChieu cao: ";
+    cin >> chieuCao;
+    cout << "\nCan nang: ";
+    cin >> canNang;
+    cout << "\nNhom mau(A,B,AB,O): ";
+    cin >> nhomMau;
 }
 void Patient::Display()
 {
@@ -44,9 +52,29 @@ void Patient::hienThiThongTinCoBan() const
 }
 
 /*khoi ham gan gia tri*/
-void Patient::ganBHYT(const string& bhyt)
+void Patient::ganBHYT(string bhyt)
 {
     maSoBHYT = bhyt;
+}
+void Patient::ganhsdBYHT(string hsd)
+{
+
+}
+void Patient::ganDateNhapVien(string date)
+{
+
+}
+void Patient::ganChisoSucKhoeMau(string Mau)
+{
+
+}
+void Patient::ganChisoSucKhoeCao(float h)
+{
+
+}
+void Patient::ganChisoSucKhoeNang(float w)
+{
+
 }
 
 /*khoi ham lay gia tri*/
@@ -54,9 +82,54 @@ string Patient::layBHYT() const
 {
     return maSoBHYT;
 }
+string Patient::layhsdBYHT() const
+{
+
+}
+string Patient::layDateNhapVien() const
+{
+
+}
+string Patient::layChisoSucKhoeMau() const
+{
+
+}
+float Patient::layChisoSucKhoeCao() const
+{
+
+}
+float Patient::layChisoSucKhoeNang() const
+{
+
+}
 
 /*khoi ham kiem tra*/
+bool Patient::kiemTraBHYTHopLe() const
+{
+    size_t a = maSoBHYT.length();
+    if ( a != 12 )
+        return 0;
+    else
+        return 1;
+    for (int i = 0; i < maSoBHYT.length(); i++)
+    {
+        if (!ktra(maSoBHYT[i]))
+            return 0;
+    }
+}
 bool Patient::kiemTraNgayNhapVienHopLe(string ngay) const
 {
     Person::kiemTraDinhDangNgaySinh(ngay);
+}
+bool Patient::kiemTraNhomMau() const
+{
+
+}
+bool Patient::kiemTraCanNang() const
+{
+
+}
+bool Patient::kiemTraChieuCao() const
+{
+
 }
