@@ -1,5 +1,17 @@
 #include "Person.h"
-/*Khoi ham khoi tao*/
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
+#include <ctime>
+
+using namespace std;
+
+bool Person::ktra(char c)
+{
+	return (c >= '0' && c <= '9');
+}
+
 Person::Person()
 {
 	Name = "";
@@ -8,7 +20,7 @@ Person::Person()
 	GioiTinh = "";
 	DiaChi = "";
 	SDT = "";
-	
+    age = 0;
 }
 
 Person::Person(string cccd, string n, string d, string sex, string diachii, string sdt)
@@ -19,100 +31,45 @@ Person::Person(string cccd, string n, string d, string sex, string diachii, stri
 	GioiTinh = sex;
 	DiaChi = diachii;
 	SDT = sdt;
+    age = tinhTuoi();
 }
 
-/*khoi ham co ban(nhap xuat)*/
-void Person::Input()
-{
-	cout << "\n--- NHAP THONG TIN ---\n";
-	cout << "Nhap ten: ";
-	cin.ignore();
-	getline(cin, Name);
-	do {
-		cout << "Nhap số CCCD/CMND: ";
-		cin.ignore();
-		getline(cin, CCCD_CMND);
-		if (!kiemTraCCCDHopLe())
-		{
-			cout << "Tuoi khong hop le! Vui long nhap lai.\n";
-		}
-	} while (!kiemTraCCCDHopLe());
-	cin.ignore();
-	do {
-		cout << "\nNhap ngay thang nam sinh (dd/mm/yy): ";
-		cin >> date;
-		if (!kiemTraNgaySinhHopLe())
-			cout << "\nNgay thang nam sinh khong hop le.";
-	} while (!kiemTraNgaySinhHopLe());
-	cout << "\nNhap dia chi: ";
-	cin.ignore();
-	getline(cin, DiaChi);
-	cin.ignore();
-	do {
-		cout << "\nNhap gioi tinh(Nam/Nu): ";
-		cin >> GioiTinh;
-		if (!kiemTraGioiTinhHopLe())
-		{
-			cout << "Gioi tinh khong hop le!\n";
-		}
-	} while (!kiemTraGioiTinhHopLe());
-	cin.ignore();
-	do {
-		cout << "\nNhap so dien thoai (10-11 so): ";
-		getline(cin, SDT);
-		if (!kiemTraSDTHopLe()) 
-		{
-			cout << "So dien thoai khong hop le!\n";
-		}
-	} while (!kiemTraSDTHopLe());
-	cin.ignore();
-	
 void Person::Display()
 {
-	cout << "========Hien thi========";
+	cout << "========Hien thi========" << endl;
 	cout << "Ten: " << Name << endl;
 	cout << "Tuoi: " << age << endl;
 	cout << "Ngay sinh: " << date << endl;
 	cout << "Gioi tinh: " << GioiTinh << endl;
 	cout << "Dia chi: " << DiaChi << endl;
 	cout << "So dien thoai: " << SDT << endl;
-	cout << "Email: " << mail << endl;
 }
-void Person::hienThiThongTinCoBan() const
+
+void Person::hienThiThongTinCoBan()
 {
-
 }
 
-/*khoi ham lay gia tri*/
-string Person::layName() const
+string Person::layName()
 {
 	return Name;
 }
-string Person::layDate() const
+string Person::layDate()
 {
 	return date;
 }
-string Person::laySdt() const
+string Person::laySdt()
 {
 	return SDT;
 }
-string Person::layDiachi() const
+string Person::layDiachi()
 {
 	return DiaChi;
 }
-string Person::layMail() const
-{
-	return mail;
-}
 
-/*khoi ham gan*/
 void Person::ganDate(string d)
 {
 	date = d;
-}
-void Person::ganMail(string m)
-{
-	mail = m;
+    age = tinhTuoi();
 }
 void Person::ganTen(string ten)
 {
@@ -127,99 +84,139 @@ void Person::ganGioiTinh(string sex)
 	GioiTinh = sex;
 }
 
-/*khoi ham tinh gia tri*/
-int Person::tinhTuoi() const
+int Person::tinhTuoi()
 {
-	return age; //chx vt:))
+    if (date.empty()) return 0;
+    
+    int day, month, year;
+    stringstream ss(date);
+    char delim;
+
+    if (!(ss >> day >> delim && delim == '/' && ss >> month >> delim && delim == '/' && ss >> year)) {
+        return 0;
+    }
+
+    if (year < 100) {
+        year += (year > (std::time(0) % 100)) ? 1900 : 2000;
+    }
+
+    time_t t = time(0);
+    tm* now = localtime(&t);
+    
+    int current_year = now->tm_year + 1900;
+    int current_month = now->tm_mon + 1;
+    int current_day = now->tm_mday;
+    
+    int calculated_age = current_year - year;
+
+    if (current_month < month || (current_month == month && current_day < day)) {
+        calculated_age--;
+    }
+    
+    age = calculated_age;
+	return age;
 }
 
-/*khoi ham kiem tra*/
-bool ktra(char c)
-{
-	return (c >= '0' && c <= '9');
-}
-bool Person::kiemTraSDTHopLe() const
+bool Person::kiemTraSDTHopLe()
 {
 	size_t dai = SDT.length();
 	if (dai < 10 || dai> 11)
 	{
-		return 0;
+		return false;
 	}
 	if (SDT[0] != '0') {
-		return 0;
+		return false;
 	}
 	for (int i = 0; i < dai; i++)
 	{
 		char c = SDT[i];
 		if (!ktra(c))
 		{
-			return 0;
+			return false;
 		}
 	}
-	return 1;
+	return true;
 }
-bool Person::kiemTraTuoiHopLe() const
+
+bool Person::kiemTraTuoiHopLe()
 {
+    if (age == 0) tinhTuoi(); 
+    
 	if (age >= 150 || age <= 0)
-		return 0;
+		return false;
 	else
-		return 1;
+		return true;
 }
-bool Person::kiemTraCCCDHopLe() const
+
+bool Person::kiemTraCCCDHopLe()
 {
 	size_t a = CCCD_CMND.length();
-	if (a != 12)
-		return 0;
+	if (a != 12 && a != 9) 
+		return false;
+        
 	for (int i = 0; i < a; i++)
 	{
 		char c = CCCD_CMND[i];
-		if (ktra(c))
-			return 1;
-		else
-			return 0;
+		if (!ktra(c))
+			return false;
 	}
-	return 1;
+	return true;
 }
-bool Person::kiemTraGioiTinhHopLe() const
+
+bool Person::kiemTraGioiTinhHopLe()
 {
 	return (GioiTinh == "Nam" || GioiTinh == "Nu");
 }
-bool Person::kiemTraEmailHopLe() const
-{
-	if (mail.length() < 5||mail.length()="")
-		return 0;
 
-	return 1;
+bool Person::kiemTraNgaySinhHopLe()
+{
+    if (date.length() < 8 || date.length() > 10) return false;
+    
+    int day, month, year;
+    stringstream ss(date);
+    char delim1, delim2;
+
+    if (!(ss >> day >> delim1 && delim1 == '/' && ss >> month >> delim2 && delim2 == '/' && ss >> year)) {
+        return false;
+    }
+
+    if (day < 1 || day > 31 || month < 1 || month > 12) return false;
+    if (year < 1900 || year > (std::time(0) % 100 + 2000)) return false;
+
+    if (month == 2) {
+        bool is_leap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+        if (day > 29 || (!is_leap && day > 28)) return false;
+    } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+        if (day > 30) return false;
+    }
+    
+	return true;
 }
-bool Person::kiemTraNgaySinhHopLe() const
-{
-	//chx bt vt sao tiếp
-	return 1;
-}
 
-
-/*khối hàm tương tác với file*/
-void Person::luuVaoFile(ofstream& file) const
+void Person::luuVaoFile(ofstream& file)
 {
-	file << Name << endl;
-	file << age << endl;
-	file << date << endl;
-	file << GioiTinh << endl;
-	file << DiaChi << endl;
-	file << SDT << endl;
-	file << mail << endl;
+	file << Name << ",";
+    file << CCCD_CMND << ",";
+	file << date << ",";
+    file << GioiTinh << ",";
+	file << DiaChi << ",";
+	file << SDT << endl; 
 }
 
 void Person::docTuFile(ifstream& file)
 {
-	getline(file, Name);
-	file >> age;
-	file.ignore();
-	getline(file, date);
-	getline(file, GioiTinh);
-	getline(file, DiaChi);
-	getline(file, SDT);
-	getline(file, mail);
+    string line;
+    if (std::getline(file, line)) 
+    {
+        std::stringstream ss(line); 
+        
+        std::getline(ss, Name, ',');
+        std::getline(ss, CCCD_CMND, ',');
+        std::getline(ss, date, ',');
+        std::getline(ss, GioiTinh, ',');
+        std::getline(ss, DiaChi, ',');
+        std::getline(ss, SDT, ','); 
+        
+        age = tinhTuoi(); 
+    }
 }
-
-
