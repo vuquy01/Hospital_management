@@ -36,7 +36,6 @@ public:
 	void themLichLamViec(const string& ngay, const string& ca);
 	void huyLichLamViec(const string& ngay);
 	bool kiemTraLichTrong(const string& ngay, const string& ca) const;
-	void themLichTaiKham(const LichTaiKham& lich);
 	void huyLichTaiKham(int index);
 	void danhDauDaTaiKham(int index);
 	void themLichHen(const string& maLichHen, const string& ngay, const string& gio);
