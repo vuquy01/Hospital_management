@@ -36,6 +36,8 @@ public:
 	string laySdt() const;
 	string layDiachi() const;
 	string layMail() const;
+	string layCCCD_CMND() const;
+	string layDiaChi() const;
 
 	/*khối hàm gán giá trị*/
 	void ganMail(string m);
@@ -45,7 +47,6 @@ public:
 	void ganGioiTinh(string sex);
 	void ganCCCD_CMND(string cccd);
 	void ganDiaChi(string adress);
-	void ganID();
 
 	/*khoi ham tinh gia tri*/
 	int tinhTuoi() const;              // Tính tuổi từ ngày sinh
@@ -58,6 +59,7 @@ public:
 	bool kiemTraGioiTinhHopLe() const; // Kiểm tra giới tính (Nam/Nu)
 	bool kiemTraCCCDHopLe() const;
 	bool kiemTraDinhDangNgaySinh(string ngay) const;
+	bool ktra(char c) const;
 
 	/*khối hàm thao tác với file*/
 	void luuVaoFile(ofstream& file) const;    // Lưu vào file
