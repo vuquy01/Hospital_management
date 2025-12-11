@@ -8,10 +8,10 @@ Person::Person()
 	GioiTinh = "";
 	DiaChi = "";
 	SDT = "";
-	mail = "";
+	
 }
 
-Person::Person(string cccd, string n, string d, string sex, string diachii, string sdt, string m)
+Person::Person(string cccd, string n, string d, string sex, string diachii, string sdt)
 {
 	Name = n;
 	date = d;
@@ -19,7 +19,6 @@ Person::Person(string cccd, string n, string d, string sex, string diachii, stri
 	GioiTinh = sex;
 	DiaChi = diachii;
 	SDT = sdt;
-	mail = m;
 }
 
 /*khoi ham co ban(nhap xuat)*/
@@ -222,4 +221,5 @@ void Person::docTuFile(ifstream& file)
 	getline(file, SDT);
 	getline(file, mail);
 }
+
 
