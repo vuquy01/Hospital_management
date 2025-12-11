@@ -93,6 +93,10 @@ void Person::hienThiThongTinCoBan() const
 {
 
 }
+string Person::taoID()
+{
+
+}
 
 /*khoi ham lay gia tri*/
 string Person::layName() const
@@ -157,10 +161,6 @@ void Person::ganDiaChi(string adress)
 {
 
 }
-void Person::ganID()
-{
-
-}
 
 /*khoi ham tinh gia tri*/
 int Person::tinhTuoi() const
@@ -181,7 +181,7 @@ int Person::tinhTuoi() const
 }
 
 /*khoi ham kiem tra*/
-bool ktra(char c)
+bool Person::ktra(char c) const
 {
 	return (c >= '0' && c <= '9');
 }
@@ -300,9 +300,7 @@ bool Person::kiemTraCCCDHopLe() const
 	for (int i = 0; i < a; i++)
 	{
 		char c = CCCD_CMND[i];
-		if (ktra(c))
-			return 1;
-		else
+		if (!ktra(c))
 			return 0;
 	}
 	return 1;
