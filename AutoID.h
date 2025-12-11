@@ -1,4 +1,6 @@
 #pragma once
-class AutoID
-{
+
+class AUTOID {
+public:
+    static int generateID();
 };
