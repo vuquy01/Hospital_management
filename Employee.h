@@ -7,12 +7,12 @@ class Employee :public Person
 {
     /* khối 1 thông tin nhân viên */
     string TypeNV;            // Loại: "YTa", "DieuDuong", "LeTan", "KeToan", "BaoVe", "LaoCong", "KyThuatVien", "ThuVien"
-    string trinhdo;
     string Chucvu;             // Chức vụ: "TruongPhong", "PhoPhong", "NhanVien", "ThucTap"
     string PhongBan;           // Phòng ban: "LeTan", "TaiChinh", "HanhChinh", "KyThuat", "VeSinh"
+    string trinhdo;
     string firstdate;            // Ngày vào làm: dd/mm/yyyy
     string TypeHD;         // "BienChe", "HopDong", "ThoiVu", "ThucTap"
-    float LuongCoBan;            // Lương cơ bản
+    static const int LUONGCOBAN = 2345000;            // Lương cơ bản
     float Heso;     // Hệ số lương
     float Phucap;             // Phụ cấp
     string status;               // "DangLamViec", "NghiPhep", "NghiViec"
@@ -52,7 +52,30 @@ public:
     /*khối hàm co bản(nhao xuat)*/
     void Input();
     void Display();
+    void hienThiThongTinCoBan() const;
+    string taoID();
+
+    /*khoi ham gan gia tri*/
+    void ganTypeNV(string type);
+    void ganChucvu(string chuc);
+    void ganPhongBan(string phong);
+    void gantrinhdo(string trinh);
+    void ganfirstdate(string ngay);
+    void ganTypeHD(string HD);
+    void ganstatus(string trangthai);
+    void ganHesoluong(float hesoluong);
+    void ganphucap(float phucapchucvu);
 
     /*khối hàm lấy giá trị*/
-    string lay();
+    string ganTypeNV() const;
+    string ganChucvu() const;
+    string ganPhongBan() const;
+    string gantrinhdo() const;
+    string ganfirstdate() const;
+    string ganTypeHD() const;
+    string ganstatus() const;
+    float ganHesoluong() const;
+    float ganphucap() const;
+
+    /*khoi ham kiem tra*/
 };
